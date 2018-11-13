@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+{% if user.is_authenticated %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        {% if posts %}
+        {% for post in posts %}
+        <div class="card text-center">
+            <div class="card-header">
+              Recieved at : {{post.time}}
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{post.message}}</p>
+            </div>
+          </div>
+          <br>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-dark" role="alert">
+            No posts yet! Patience Man!
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-sm-4">
+        <div class="text-center">
+          <div class="card bg-light ml-3" style="max-width: 18rem;">
+            <div class="card-header">Profile</div>
+            <div class="card-body">
+                <i class="fas fa-poo fa-3x" style="color:darkgoldenrod"></i>
+              <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+              <p class="card-text">
+                <i class="fas fa-user-tie"></i>
+                <b>Username : </b>
+                <i>{{ user.get_username }}</i><br>
+                <i class="fas fa-envelope"></i>
+                <b>Email : </b>
+                <i>{{ user.email }}</i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% else %}
+<div class="alert alert-danger" role="alert">
+    Sorry pal... you are not logged in!
+</div>
+{% endif %}
+{% endblock %}

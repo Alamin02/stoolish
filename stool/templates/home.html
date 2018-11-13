@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container">
+        {% if message %}
+        <div class="alert alert-primary" role="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+        <div class="text-center">
+            <br><br>
+            <h1 class="text-uppercase">
+                <b>
+                    <i class="fas fa-poo fa-5x" style="color:darkgoldenrod"></i><br>
+                    Ready<br>To<br>Get<br>Pooped?
+                </b>
+            </h1>
+            {% if user.is_authenticated %}
+            <h6>Then Spread this Link:</h6>
+            <h6><i>http://stoolish.herokuapp.com/{{ user.get_username }}</i></h6>
+            {% else %}
+            <h6>Please <a href="/login/">Login</a> or <a href="/signup/">Signup</a>, Get Started!</h6>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
