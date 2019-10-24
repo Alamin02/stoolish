@@ -6,55 +6,56 @@
 
 <br><br><br>
 {% if user.is_authenticated %}
-<div class="alert alert-success" role="alert">
-    Hey Shitbag, you are already logged in!
-  </div>
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        Hey Shitbag, you are already logged in!
+    </div>
+</div>
 {% else %}
-<div class="d-flex justify-content-center">
-  <div class="card text-center col-sm-6 col-md-6 col-lg-4 form-holder-card">
-    <div class="card-header">
-      The world is full of poop...
-    </div>
-    <div class="card-body">
-      <h3 class="card-title">L O G I N</h3>
 
-      <form method="POST">
-        {% csrf_token %}
-        {% if form.errors %}
-        <div class="alert alert-danger" role="alert">
-            Invalid Credentials you piece if shit!
-          </div>
-        {% endif %}
-        <div class="form-group">
-          <label class="sr-only">Username</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">{{ form.username.label_tag }}</div>
-            </div>
-            {{ form.username }}
-          </div>
+<div class="d-flex justify-content-center">
+    <div class="card text-center col-sm-6 col-md-6 col-lg-4 form-holder-card">
+        <div class="card-header">
+            The world is full of poop...
         </div>
-        <div class="form-group">
-          <label class="sr-only">Username</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">{{ form.password.label_tag }}</div>
-            </div>
-            {{ form.password }}
-          </div>
+        <div class="card-body">
+            <h3 class="card-title">L O G I N</h3>
+
+            <form method="POST">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    Invalid Credentials you piece if shit!
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <label class="sr-only">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">{{ form.username.label_tag }}</div>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">{{ form.password.label_tag }}</div>
+                        </div>
+                        {{ form.password }}
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-dark" value="LOGIN"/>
+                <input type="hidden" name="next" value="{{ next }}"/>
+            </form>
         </div>
-        <input type="submit" class="btn btn-dark" value="LOGIN" />
-        <input type="hidden" name="next" value="{{ next }}" />
-        </form>
+        <div class="card-footer text-muted">
+            ...You are just adding some more!
+        </div>
     </div>
-    <div class="card-footer text-muted">
-      ...You are just adding some more!
-    </div>
-  </div>
 </div>
 
 {% endif %}
-
-
 
 {% endblock %}

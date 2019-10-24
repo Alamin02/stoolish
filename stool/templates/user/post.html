@@ -2,31 +2,33 @@
 
 {% block body %}
 
-<br><br><br>
-
-<div class="card text-center">
-    <div class="card-header">
-      User : {{ user.username }}
-    </div>
-    <div class="card-body">
-        {% if message == 'success' %}
-        <div class="alert alert-success" role="alert">
-            Good job! Wanna go for more? Sure u can do better than this!
+<div class="container page-container">
+    <div class="d-flex justify-content-center">
+        <div class="card text-center col-sm-6 col-md-6 col-lg-6  form-holder-card">
+            <div class="card-header">
+                To: {{ user.username }}
+            </div>
+            <div class="card-body">
+                {% if message == 'success' %}
+                <div class="alert alert-success" role="alert">
+                    Good job! Wanna go for more? Sure u can do better than this!
+                </div>
+                {% endif %}
+                <h5 class="card-title">Ready to leave poop on {{ user.first_name }} {{ user.last_name }}'s Face?</h5>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.message}}
+                    <input type="hidden" name="user" value="{{ user.username }}">
+                    <br>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted">
+                Let him choke it...!
+            </div>
         </div>
-        {% endif %}
-      <h5 class="card-title">Ready to leave poop on {{ user.first_name }} {{ user.last_name }}'s Face?</h5>
-      <form method="POST">
-        {% csrf_token %}
-        {{form.message}}
-        <input type="hidden" name="user" value="{{ user.username }}">
-        <br>
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
     </div>
-    <div class="card-footer text-muted">
-      Let him choke it...!
-    </div>
-  </div>
+</div>
 
 
 {% endblock %}

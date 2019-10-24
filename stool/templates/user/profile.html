@@ -1,50 +1,52 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<br>
 {% if user.is_authenticated %}
-  <div class="container-fluid">
+<div class="container page-container">
     <div class="row">
-      <div class="col-sm-8">
-        {% if posts %}
-        {% for post in posts %}
-        <div class="card text-center">
-            <div class="card-header">
-              Recieved at : {{post.time}}
-            </div>
-            <div class="card-body">
-              <p class="card-text">{{post.message}}</p>
-            </div>
-          </div>
-          <br>
-        {% endfor %}
-        {% else %}
-        <div class="alert alert-dark" role="alert">
-            No posts yet! Patience Man!
-          </div>
-        {% endif %}
-      </div>
-      <div class="col-sm-4">
-        <div class="text-center">
-          <div class="card bg-light ml-3" style="max-width: 18rem;">
-            <div class="card-header">Profile</div>
-            <div class="card-body">
-                <i class="fas fa-poo fa-3x" style="color:darkgoldenrod"></i>
-              <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
-              <p class="card-text">
-                <i class="fas fa-user-tie"></i>
-                <b>Username : </b>
-                <i>{{ user.get_username }}</i><br>
-                <i class="fas fa-envelope"></i>
-                <b>Email : </b>
-                <i>{{ user.email }}</i>
-              </p>
-            </div>
-          </div>
+
+        <div class="col-sm-4 col-xs-12 mb-4">
+
+                <div class="card bg-light">
+                    <img class="card-img-top" src="/static/img/profile.jpg" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+                        <p class="card-text">
+                            <b>Username : </b>
+                            <i>{{ user.get_username }}</i><br>
+                            <b>Email : </b>
+                            <i>{{ user.email }}</i><br/>
+                            <b>Link : </b>
+                            <i>{{ request.get_host }}/{{ user.get_username }}</i>
+                        </p>
+                    </div>
+                </div>
+
         </div>
-      </div>
+
+        <div class="col-sm-8 col-xs-12">
+            {% if posts %}
+            {% for post in posts %}
+
+            <div class="card post">
+                <div class="card-body">
+                    <img src="/static/img/anonym.jpg" class="avatar">
+                    <p class="card-text">
+                        {{post.message}} <br/>
+                        <small class="text-muted">{{post.time}}</small>
+                    </p>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-dark" role="alert">
+                No posts yet! Patience Man!
+            </div>
+            {% endif %}
+        </div>
     </div>
-  </div>
+</div>
 
 
 {% else %}
