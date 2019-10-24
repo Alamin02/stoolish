@@ -8,9 +8,7 @@ class Post(models.Model):
         User,
         on_delete=models.CASCADE,
     )
-
     message = models.TextField()
-    
     time = models.DateTimeField(auto_now=True)
 
     class Meta:

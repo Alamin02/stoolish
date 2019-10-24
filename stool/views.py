@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
@@ -7,9 +8,11 @@ from .forms import RegistrationForm, ReceivePost, LoginForm
 from .models import Post
 
 
+@login_required(login_url="/login")
 def profile(request):
     if request.user.is_authenticated:
         username = request.user.username
+
     user = User.objects.get(username=username)
     query = Post.objects.filter(user__exact=user)
     return render(request, 'user/profile.html', {'posts': query})
@@ -55,23 +58,23 @@ def post_on_wall(request, username):
         if form.is_valid:
             post.save()
             context = {
-                'user' : user,
-                'form' : form,
-                'message' : 'success',
+                'user': user,
+                'form': form,
+                'message': 'success',
             }
             return render(request, 'user/post.html', context)
         else:
             context = {
-                'user' : user,
-                'form' : form,
-                'message' : 'failed',
+                'user': user,
+                'form': form,
+                'message': 'failed',
             }
             return render(request, 'user/post.html', context)
     else:
         person = get_object_or_404(User, username=username)
         form = ReceivePost
         context = {
-            'user' : person,
-            'form' : form
+            'user': person,
+            'form': form
         }
         return render(request, 'user/post.html', context)
