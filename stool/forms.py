@@ -28,9 +28,9 @@ class RegistrationForm(UserCreationForm):
             'password2'
         )
         widgets = {
-            'username' : forms.TextInput(attrs={'class': 'form-control'}),
-            'first_name' : forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name' : forms.TextInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
     def save(self, commit=True):
@@ -45,7 +45,7 @@ class RegistrationForm(UserCreationForm):
         return user
 
 
-class RecievePost(forms.ModelForm):
+class ReceivePost(forms.ModelForm):
 
     class Meta:
         model = Post
@@ -53,5 +53,5 @@ class RecievePost(forms.ModelForm):
             'message',
         )
         widgets = {
-            'message': forms.Textarea(attrs={'class': 'form-control'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
         }

@@ -18,8 +18,9 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{form.message}}
-                    <input type="hidden" name="user" value="{{ user.username }}">
-                    <br>
+                    <div class="form-group">
+                        <input type="hidden" name="user" value="{{ user.username }}">
+                    </div>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
             </div>

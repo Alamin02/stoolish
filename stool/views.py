@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 
-from .forms import RegistrationForm, RecievePost, LoginForm
+from .forms import RegistrationForm, ReceivePost, LoginForm
 from .models import Post
 
 
@@ -49,7 +49,7 @@ def sign_up(request):
 
 def post_on_wall(request, username):
     if request.method == 'POST':
-        form = RecievePost(request.POST)
+        form = ReceivePost(request.POST)
         user = User.objects.get(username=username)
         post = Post(user=user, message=form.data['message'])
         if form.is_valid:
@@ -69,7 +69,7 @@ def post_on_wall(request, username):
             return render(request, 'user/post.html', context)
     else:
         person = get_object_or_404(User, username=username)
-        form = RecievePost
+        form = ReceivePost
         context = {
             'user' : person,
             'form' : form
