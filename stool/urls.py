@@ -1,10 +1,8 @@
-from django.urls import path, include
-from django.contrib.auth.views import login
+from django.urls import path
 from . import views
-from .forms import LoginForm
 
 urlpatterns = [
-    path('login/', login, kwargs={'authentication_form':LoginForm}),
+    path('login/', views.CustomLoginView.as_view()),
     path('profile/', views.profile),
     path('', views.home),
     path('logout/', views.logout_view),

@@ -1,9 +1,11 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 
-from .forms import RegistrationForm, RecievePost
+from .forms import RegistrationForm, RecievePost, LoginForm
 from .models import Post
+
 
 def profile(request):
     if request.user.is_authenticated:
@@ -12,12 +14,20 @@ def profile(request):
     query = Post.objects.filter(user__exact=user)
     return render(request, 'user/profile.html', {'posts': query})
 
+
 def home(request):
     return render(request, 'home.html')
+
+
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+    template_name = "auth/login.html"
+
 
 def logout_view(request):
     logout(request)
     return redirect('/')
+
 
 def sign_up(request):
     if request.method == 'POST':
@@ -31,10 +41,11 @@ def sign_up(request):
                 login(request, user)
             return redirect('/')
         else:
-            return render(request,'registration/signup.html' , {'error' : 'Invalid Credentials!', 'form':form })
+            return render(request, 'auth/signup.html', {'error': 'Invalid Credentials!', 'form': form})
     else:
         form = RegistrationForm
-        return render(request, 'registration/signup.html', {'form': form})
+        return render(request, 'auth/signup.html', {'form': form})
+
 
 def post_on_wall(request, username):
     if request.method == 'POST':

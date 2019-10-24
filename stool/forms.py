@@ -4,14 +4,18 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from .models import Post
 
+
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder': 'Please Inser Username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}))
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Please Insert Username'})
+    )
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
+
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
@@ -28,6 +32,7 @@ class RegistrationForm(UserCreationForm):
             'first_name' : forms.TextInput(attrs={'class': 'form-control'}),
             'last_name' : forms.TextInput(attrs={'class': 'form-control'}),
         }
+
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
@@ -39,6 +44,7 @@ class RegistrationForm(UserCreationForm):
 
         return user
 
+
 class RecievePost(forms.ModelForm):
 
     class Meta:
@@ -47,6 +53,5 @@ class RecievePost(forms.ModelForm):
             'message',
         )
         widgets = {
-            'message' : forms.Textarea(attrs={'class': 'form-control'}),
-            #'user' : forms.HiddenInput(attrs={'value': '{{ user.username }}'}),
+            'message': forms.Textarea(attrs={'class': 'form-control'}),
         }

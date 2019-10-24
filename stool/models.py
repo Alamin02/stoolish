@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+
 class Post(models.Model):
     user = models.ForeignKey(
         User,
@@ -19,4 +20,4 @@ class Post(models.Model):
         return reverse('model-detail-view', args=[str(self.pk)])
 
     def __str__(self):
-        return self.field_name
+        return self.message
