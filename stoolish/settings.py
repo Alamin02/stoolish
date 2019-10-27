@@ -25,7 +25,7 @@ SECRET_KEY = 'b*farb!x10vdt96xsxuun5es5o(e(3b2nz6%ybo##z&yf*r)*v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stoolish.herokuapp.com']
+ALLOWED_HOSTS = ['stoolish.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'stoolish.urls'
